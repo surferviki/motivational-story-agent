@@ -1,5 +1,5 @@
 import time
-from story_generator import generate_story, save_story
+from story_generator import generate_story, save_story, send_whatsapp
 
 def main():
     story = generate_story()
@@ -8,7 +8,9 @@ def main():
 
     save_story(story)
 
-    # Keep the container alive for 1 minute so logs are visible
+    send_whatsapp(story)
+
+    # Keep the container alive 60 seconds so we can see logs
     print("\n⏳ Keeping container alive for 60 seconds...")
     time.sleep(60)
 
