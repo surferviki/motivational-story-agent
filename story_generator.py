@@ -1,7 +1,12 @@
 import os
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    raise ValueError("❌ OPENAI_API_KEY not found! Add it in Railway Variables.")
+
+client = OpenAI(api_key=api_key)
 
 def generate_story():
     prompt = """
