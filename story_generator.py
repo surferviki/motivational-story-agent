@@ -76,4 +76,3 @@ def send_whatsapp(story):
     )
 
     print(f"📩 WhatsApp message sent! SID: {message.sid}")
-˜
