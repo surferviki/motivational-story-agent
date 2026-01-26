@@ -12,32 +12,31 @@ headers = {
 }
 
 TOPICS = [
-    "never giving up",
-    "being kind to others",
-    "believing in yourself",
-    "helping friends",
-    "trying again after failure",
-    "loving nature",
-    "being brave",
-    "sharing and caring"
+    "a tiny seed growing into a tree",
+    "a brave little kitten learning to climb",
+    "two friends solving a mystery in the park",
+    "a lost puppy finding its way home",
+    "a child learning to ride a bicycle",
+    "a magical balloon that teaches courage"
 ]
 
 def generate_story():
     topic = random.choice(TOPICS)
 
     prompt = f"""
-Write a short, fun, motivational story for kids about {topic}.
+Write a fun, motivational story for kids about {topic}.
 The story should:
-- Be positive and encouraging
-- Have a clear beginning, middle, and happy ending
-- Be under 300 words
-- End with a simple lesson
+- Have at least 3 paragraphs (beginning, middle, end)
+- Include at least 2 characters or objects
+- Include a challenge and a solution
+- End with a happy ending and a simple lesson
+- Be playful, exciting, and suitable for ages 5-10
 """
 
     payload = {
         "inputs": prompt,
         "parameters": {
-            "max_new_tokens": 250,
+            "max_new_tokens": 400,
             "temperature": 0.9,
             "top_p": 0.95,
             "do_sample": True
@@ -51,6 +50,7 @@ The story should:
         return result[0]["generated_text"].strip()
 
     return "Once upon a time, a little star learned to shine bright even on cloudy days. 🌟"
+
 
 def save_story(story):
     os.makedirs("stories", exist_ok=True)
@@ -76,3 +76,4 @@ def send_whatsapp(story):
     )
 
     print(f"📩 WhatsApp message sent! SID: {message.sid}")
+˜
