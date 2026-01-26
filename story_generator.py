@@ -1,30 +1,20 @@
 import os
 from datetime import datetime
-from openai import OpenAI
+# Comment out OpenAI import for now
+# from openai import OpenAI
 
-api_key = os.getenv("OPENAI_API_KEY")
-
-if not api_key:
-    raise ValueError("❌ OPENAI_API_KEY not found! Add it in Railway Variables.")
-
-client = OpenAI(api_key=api_key)
+# Mock client (not calling OpenAI)
+# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_story():
-    prompt = """
-Write a short motivational story (5–7 sentences).
-Make it positive, simple, and inspiring.
-End with a hopeful message.
-"""
-
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {"role": "system", "content": "You are a kind motivational storyteller."},
-            {"role": "user", "content": prompt}
-        ]
+    # Mock story for testing
+    story = (
+        "Once upon a time, there was a small seed that wanted to grow into a big tree. "
+        "Every day, it soaked up sunlight and drank water, even when storms came. "
+        "The seed never gave up, and slowly it grew taller and stronger. "
+        "One day, it became the tallest tree in the forest, giving shade and shelter to everyone. "
+        "Remember, no matter how small you start, patience and effort will make you flourish!"
     )
-
-    story = response.choices[0].message.content
     return story
 
 
