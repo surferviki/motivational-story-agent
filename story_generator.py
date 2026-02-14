@@ -7,14 +7,21 @@ def generate_story():
         base_url="https://openrouter.ai/api/v1",
     )
 
-    response = client.chat.completions.create(
-        model="openai/gpt-4o-mini",
-        messages=[
-            {
-                "role": "user",
-                "content": "Write a short motivational story about discipline and consistency."
-            }
-        ],
-    )
+    messages = [
+        {
+            "role": "user",
+            "content": "Write a short motivational story for kids about discipline and consistency."
+        }
+    ]
 
-    return response.choices[0].message.content
+    try:
+        response = client.chat.completions.create(
+            model="openai/gpt-4o-mini",
+            messages=messages,
+        )
+        story = response.choices[0].message.content
+        print("✅ Story generated successfully")
+        return story
+    except Exception as e:
+        print("❌ Failed to generate story:", e)
+        return None
