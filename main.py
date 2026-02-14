@@ -1,3 +1,4 @@
+import os
 from story_generator import generate_story
 from email_sender import send_email
 
