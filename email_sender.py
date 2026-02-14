@@ -6,7 +6,7 @@ SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_RECIPIENT = os.getenv("EMAIL_RECIPIENT")  # Must be a valid email
 
 # Use a verified sender in SendGrid
-VERIFIED_SENDER = "verified-sender@example.com"
+VERIFIED_SENDER = "vignesh.instrumentation@gmail.com"
 
 def send_email(subject, body):
     if not SENDGRID_API_KEY:
