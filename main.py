@@ -15,7 +15,7 @@ def main():
         print("❌ EMAIL_RECIPIENT not set. Exiting.")
         return
 
-    send_email(subject, body)
+    send_email(subject, body, to)
 
 if __name__ == "__main__":
     main()
