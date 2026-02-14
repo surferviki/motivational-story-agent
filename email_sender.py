@@ -15,11 +15,11 @@ def send_email(subject, body):
         return
 
     message = Mail(
-        from_email="no-reply@yourdomain.com",  # can be any verified sender
-        to_emails=EMAIL_RECIPIENT,
-        subject=subject,
-        html_content=body
-    )
+    from_email="vignesh.instrumentation.com",  # Must match a verified sender in SendGrid
+    to_emails=EMAIL_RECIPIENT,
+    subject=subject,
+    html_content=body
+)
 
     try:
         sg = SendGridAPIClient(SENDGRID_API_KEY)
