@@ -1,34 +1,28 @@
 import os
-import smtplib
-from email.message import EmailMessage
-import socket
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
-GMAIL_USER = os.getenv("GMAIL_USER")
-GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 
 def send_email(subject, body, to):
-    if not GMAIL_USER or not GMAIL_APP_PASSWORD:
-        print("❌ Gmail credentials missing!")
+    if not SENDGRID_API_KEY:
+        print("❌ SENDGRID_API_KEY not set!")
         return
 
     if not to:
-        print("❌ Recipient email missing!")
+        print("❌ Recipient email not set!")
         return
 
+    message = Mail(
+        from_email="no-reply@yourdomain.com",  # Can be any verified sender in SendGrid free tier
+        to_emails=to,
+        subject=subject,
+        html_content=body
+    )
+
     try:
-        socket.setdefaulttimeout(30)  # Avoid hanging
-        print("Connecting to Gmail SMTP...")
-        msg = EmailMessage()
-        msg.set_content(body)
-        msg["Subject"] = subject
-        msg["From"] = GMAIL_USER
-        msg["To"] = to
-
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=30) as smtp:
-            smtp.login(GMAIL_USER, GMAIL_APP_PASSWORD)
-            print("✅ Logged in to Gmail")
-            smtp.send_message(msg)
-            print(f"📩 Email sent to {to}")
-
+        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        response = sg.send(message)
+        print(f"📩 Email sent to {to} | Status Code: {response.status_code}")
     except Exception as e:
         print("❌ Failed to send email:", e)
