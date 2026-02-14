@@ -1,22 +1,19 @@
-import os
 from openrouter import OpenRouter
-
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-
-client = OpenRouter(api_key=OPENROUTER_API_KEY)
+import os
 
 def generate_story():
-    prompt = """
-    Write a short motivational story for kids (5–7 sentences).
-    Make it positive, creative, and inspiring.
-    End with a hopeful lesson.
-    """
-
-    response = client.text.create(
-        model="gpt-j-6B-instruct",  # free/open friendly
-        input=prompt,
-        max_output_tokens=180
+    client = OpenRouter(
+        api_key=os.environ["OPENROUTER_API_KEY"]
     )
 
-    # some backends return text differently
-    return response.get("output_text") or response.get("output", "")
+    response = client.chat.completions.create(
+        model="openai/gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": "Write a short motivational story about discipline and consistency."
+            }
+        ]
+    )
+
+    return response.choices[0].message.content
