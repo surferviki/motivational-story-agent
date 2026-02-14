@@ -6,7 +6,7 @@ def generate_story():
         api_key=os.environ["OPENROUTER_API_KEY"]
     )
 
-    response = client.chat.completions.create(
+    response = client.chat.create(
         model="openai/gpt-4o-mini",
         messages=[
             {
@@ -16,4 +16,4 @@ def generate_story():
         ]
     )
 
-    return response.choices[0].message.content
+    return response["choices"][0]["message"]["content"]
