@@ -3,7 +3,7 @@ from openrouter import OpenRouter
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-client = OpenRouterAPI(api_key=OPENROUTER_API_KEY)
+client = OpenRouter(api_key=OPENROUTER_API_KEY)
 
 def generate_story():
     prompt = """
