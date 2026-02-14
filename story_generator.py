@@ -1,5 +1,5 @@
 import os
-from openrouter import OpenRouterAPI
+from openrouter import OpenRouter
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
